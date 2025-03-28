@@ -13,6 +13,7 @@ def main(page: ft.Page):
     # Definição de funçõe
 
     def mostrar_valor(e):
+
         num1_input.value = int(num1_input.value)
         verificar = num1_input.value % 2
         if verificar == 0:

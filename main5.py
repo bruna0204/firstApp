@@ -18,11 +18,13 @@ def main(page: ft.Page):
         data_informada = datetime.datetime.strptime(data.value, '%d-%m-%Y')
         idade_atual = tempo_atual.year - data_informada.year
         if idade_atual < 18:
-            txt_resultado.value = f'você tem {idade_atual} de idade você é menor de idade'
+            txt_resultado.value = f' você é menor de idade'
             page.update()
+        elif idade_atual > 110:
+            txt_resultado.value = f'Essa pessoa não existe'
 
         else:
-            txt_resultado.value = f'você tem {idade_atual} de idade você é maior de idade'
+            txt_resultado.value = f' você é maior de idade'
             page.update()
 
 
