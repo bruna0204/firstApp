@@ -17,14 +17,31 @@ def main(page: ft.Page):
         tempo_atual = datetime.datetime.now()
         data_informada = datetime.datetime.strptime(data.value, '%d-%m-%Y')
         idade_atual = tempo_atual.year - data_informada.year
+        meses_atual = tempo_atual.month
+        dias_atual = tempo_atual.day
+
+        if meses_atual < data_informada.month:
+            idade_atual = idade_atual - 1
+
+
+        elif meses_atual == data_informada.month:
+            if dias_atual < data_informada.day:
+                idade_atual = idade_atual - 1
+
         if idade_atual < 18:
-            txt_resultado.value = f' você é menor de idade'
+            txt_resultado.value = f' sua idade é {idade_atual} você é menor de idade'
             page.update()
+
+
+
+
+
+
         elif idade_atual > 110:
             txt_resultado.value = f'Essa pessoa não existe'
 
         else:
-            txt_resultado.value = f' você é maior de idade'
+            txt_resultado.value = f' sua idade é {idade_atual} você é maior de idade'
             page.update()
 
 
