@@ -46,6 +46,8 @@ def main(page: ft.Page):
                     ],
                 )
             )
+
+
         page.update()
 
     def voltar(e):
@@ -57,6 +59,7 @@ def main(page: ft.Page):
     input_descricao = ft.TextField(label="descricao", hint_text="Digite a descricao")
     input_categoria = ft.TextField(label="categoria", hint_text="Digite a categoria")
     input_autor = ft.TextField(label="autor", hint_text="Digite o autor")
+    txt_resultado = ft.Text(value="")
 
     page.on_route_change = gerenciar_rotas
     page.on_view_pop = voltar
