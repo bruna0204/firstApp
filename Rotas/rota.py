@@ -28,7 +28,7 @@ def main(page: ft.Page):
                     AppBar(
                         title=Text("Pagina inicial"), bgcolor=Colors.PRIMARY_CONTAINER),
                     ft.Container(
-                        ft.Image(src="../INSS_app/images-removebg-preview.png"),
+                        ft.Image(src="../../INSS_app/images-removebg-preview.png"),
                         margin=50,
                     ),
                     ft.Container(
