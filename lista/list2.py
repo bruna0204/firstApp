@@ -40,13 +40,35 @@ def main(page: ft.Page):
             msg_sucesso.open = True
             page.update()
 
-    def exibir_lista(e):
-        lv_dados.controls.clear()
+    def exibir_dados(e):
+        lv.controls.clear()
         for user in lista:
-            lv_dados.controls.append(
-                ft.Text(value= f"{user.titulo} - {user.descrisao} - {user.categoria} - {user.autor}")
+            lv.controls.append(
+                ft.Text(value= f"Titulo: {user.titulo}\n"
+                               f"Descrisao: {user.descrisao}\n"
+                               f"Categoria: {user.categoria}\n"
+                               f"Autor: {user.autor}\n")
             )
         page.update()
+
+    def vizualiza_dados(e):
+        lv.controls.clear()
+        for user in lista:
+            lv.controls.append(
+                ft.ListTile(
+                    leading=ft.Icon(ft.Icons.PERSON),
+                    title=ft.Text(f"Titulo: {user.titulo}"),
+                    trailing=ft.PopupMenuButton(
+                        icon=ft.Icons.MORE_VERT,
+                        items=[
+                            ft.PopupMenuItem(text=f"detalhes", on_click=lambda _: page.go("/terceira")),
+                        ]
+                    )
+                )
+            )
+
+
+
     def gerencia_rotas(e):
         page.views.clear()
         page.views.append(
@@ -69,19 +91,34 @@ def main(page: ft.Page):
                 ],
             )
         )
+
         if page.route == "/segunda":
-            exibir_lista(e)
+            vizualiza_dados(e)
             page.views.append(
                 View(
                     "/segunda",
                     [
                         AppBar(title=Text("Segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER),
-                        lv_dados,
+                        lv
 
                     ],
                 )
             )
+        if page.route == "/terceira":
+            exibir_dados(e)
+            page.views.append(
+                View(
+                    "/terceira",
+                    [
+                        AppBar(title=Text("detalhes"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        lv
+                    ],
+                )
+            )
         page.update()
+
+    page.on_route_changed = gerencia_rotas
+    page.go(page.route)
 
     def voltar(e):
         page.views.pop()
@@ -105,7 +142,7 @@ def main(page: ft.Page):
     input_categoria = ft.TextField(label="categoria", hint_text="Digite a categoria")
     input_autor = ft.TextField(label="autor", hint_text="Digite o autor")
     btn_salvar = ft.Button(text="Salvar")
-    lv_dados = ft.ListView(
+    lv = ft.ListView(
         height=500
     )
 
